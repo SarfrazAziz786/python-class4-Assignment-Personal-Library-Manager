@@ -9,7 +9,7 @@ def load_library():
         try:
             with open(data_file, "r") as file:
                 return json.load(file)
-        except (json.JSONDecodeError, IOError):
+        except (json.JSONDecodeError, IOError): # JSONDecodeError is raised when the JSON data is invalid 
             return []
     return []
 
@@ -73,7 +73,7 @@ def remove_book(library):
 
 def search_library(library):
     """Searches for a book by title or author."""
-    search_by = get_valid_input("Search by title or author: ").lower()
+    search_by = get_valid_input("Search by title or author?: ").lower()
     
     if search_by not in ["title", "author"]:
         print("Invalid search criteria. Please enter 'title' or 'author'.")
@@ -82,6 +82,7 @@ def search_library(library):
     search_term = get_valid_input(f"Enter the {search_by}: ").lower()
 
     results = [book for book in library if search_term in book[search_by].strip().lower()]
+
 
     if results:
         for book in results:
@@ -109,6 +110,7 @@ def display_statistics(library):
         print("No books in the library to display statistics.")
         return
 
+
     total_read_books = sum(1 for book in library if book["read"])
     total_unread_books = total_books - total_read_books
 
@@ -121,7 +123,6 @@ def display_statistics(library):
 
 
 def main():
-    """Main function that provides a menu-driven interface for library management."""
     library = load_library()
 
     while True:
@@ -152,6 +153,6 @@ def main():
             print("Invalid choice. Please enter a number between 1 and 6.")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # This block of code will only run if the script is executed directly
     main()
 
